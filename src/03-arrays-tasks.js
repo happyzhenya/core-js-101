@@ -564,12 +564,18 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/*  array, keySelector, valueSelector  */) {
-  /*  const mapnew = new Map();
+function group(array, keySelector, valueSelector) {
+  const map = new Map();
   array.filter((el) => {
-    return mapnew.set(el.keySelector, [el.valueSelector]);
-  }); */
-  throw new Error('Not implemented');
+    const key = keySelector(el);
+    const value = valueSelector(el);
+    const values = map.get(key) || [];
+    values.push(value);
+    return map.set(key, values);
+  });
+
+  return map;
+  //  throw new Error('Not implemented');
 }
 
 /**
@@ -605,8 +611,10 @@ function selectMany(arr, childrenSelector) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  return indexes.reduce((acc, el) => acc[el], arr);
+
+  // throw new Error('Not implemented');
 }
 
 /**
