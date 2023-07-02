@@ -66,7 +66,7 @@ function getPowerFunction(exponent) {
  *   getPolynom()      => null
  */
 function getPolynom(...args) {
-  return function (x) {
+  return (x) => {
     if (args.length === 3) {
       return x * x * args[0] + x * args[1] + args[2];
     }
@@ -98,7 +98,7 @@ function getPolynom(...args) {
 function memoize(func) {
   //  throw new Error('Not implemented');
   const cashe = {};
-  return function (n) {
+  return (n) => {
     if (n in cashe) {
       return cashe[n];
     }
@@ -178,7 +178,7 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
 function partialUsingArguments(fn, ...args1) {
-  return function (...args2) {
+  return function a(...args2) {
     return fn(...args1, ...args2);
   };
 }
@@ -203,7 +203,7 @@ function partialUsingArguments(fn, ...args1) {
 function getIdGeneratorFunction(startFrom) {
   let id = startFrom;
 
-  return function () {
+  return () => {
     const currentId = id;
     id += 1;
     return currentId;
