@@ -280,7 +280,8 @@ function getSecondItems(arr) {
 function propagateItemsByPositionIndex(arr) {
   return arr.reduce(
     (acc, val, i) => acc.concat(new Array(i + 1).fill(val)),
-    [],
+    // eslint-disable-next-line comma-dangle
+    []
   );
 
   //  throw new Error('Not implemented');
@@ -350,7 +351,11 @@ function sortDigitNamesByNumericOrder(arr) {
   };
 
   const newarr = arr.map((el) => arrNumbers[el]).sort();
-  const result = newarr.map((el) => Object.keys(arrNumbers).find((key) => arrNumbers[key] === el));
+  const result = newarr.map(
+    // eslint-disable-next-line comma-dangle
+    (el) => Object.keys(arrNumbers).find((key) => arrNumbers[key] === el)
+    // eslint-disable-next-line function-paren-newline
+  );
   return result;
   //  throw new Error('Not implemented');
 }
@@ -487,7 +492,7 @@ function sortCitiesArray(arr) {
  *           [0,0,0,1,0],
  *           [0,0,0,0,1]]
  */
-function getIdentityMatrix(/* n */) {
+function getIdentityMatrix(/*  n  */) {
   throw new Error('Not implemented');
 }
 

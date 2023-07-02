@@ -65,8 +65,20 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  return function (x) {
+    if (args.length === 3) {
+      return x * x * args[0] + x * args[1] + args[2];
+    }
+    if (args.length === 2) {
+      return x * args[0] + args[1];
+    }
+    if (args.length === 1) {
+      return args[0];
+    }
+    return null;
+  };
+  //  throw new Error('Not implemented');
 }
 
 /**
@@ -83,8 +95,17 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  //  throw new Error('Not implemented');
+  const cashe = {};
+  return function (n) {
+    if (n in cashe) {
+      return cashe[n];
+    }
+    const result = func(n);
+    cashe[n] = result;
+    return result;
+  };
 }
 
 /**
@@ -102,8 +123,18 @@ function memoize(/* func */) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  let attempt = 0;
+  return (...arg) => {
+    while (attempt < attempts) {
+      try {
+        attempt = func(...arg);
+      } catch (error) {
+        attempt += 1;
+      }
+    }
+    return attempt;
+  };
 }
 
 /**
@@ -146,8 +177,10 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  return function (...args2) {
+    return fn(...args1, ...args2);
+  };
 }
 
 /**
@@ -167,8 +200,15 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let id = startFrom;
+
+  return function () {
+    const currentId = id;
+    id += 1;
+    return currentId;
+  };
+  // throw new Error('Not implemented');
 }
 
 module.exports = {
